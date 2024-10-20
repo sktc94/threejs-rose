@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Red Rose Growing on Click</title>
+  <title>Stylized 3D Lily</title>
   <style>
     body {
       margin: 0;
@@ -29,36 +29,59 @@
     light.position.set(5, 5, 5).normalize();
     scene.add(light);
 
-    // Create the red rose (using a sphere to represent a rose)
-    const geometry = new THREE.SphereGeometry(1, 32, 32);
-    const material = new THREE.MeshPhongMaterial({ color: 0xff0000 });  // Red color
-    const redRose = new THREE.Mesh(geometry, material);
-    scene.add(redRose);
+    // Create the petals (using cones for simplicity)
+    const petalGeometry = new THREE.ConeGeometry(0.5, 2, 16);  // Radius, Height, Segments
+    const petalMaterial = new THREE.MeshPhongMaterial({ color: 0xfff0f5 });  // Light pinkish color for petals
+
+    const petal1 = new THREE.Mesh(petalGeometry, petalMaterial);
+    const petal2 = new THREE.Mesh(petalGeometry, petalMaterial);
+    const petal3 = new THREE.Mesh(petalGeometry, petalMaterial);
+    const petal4 = new THREE.Mesh(petalGeometry, petalMaterial);
+    const petal5 = new THREE.Mesh(petalGeometry, petalMaterial);
+
+    // Position the petals to form a flower shape
+    petal1.position.set(0, 0.5, 0);
+    petal1.rotation.x = Math.PI / 6;
+
+    petal2.position.set(Math.sin(Math.PI * 2 / 5) * 1.5, 0.5, Math.cos(Math.PI * 2 / 5) * 1.5);
+    petal2.rotation.set(Math.PI / 6, 0, Math.PI * 2 / 5);
+
+    petal3.position.set(Math.sin(Math.PI * 4 / 5) * 1.5, 0.5, Math.cos(Math.PI * 4 / 5) * 1.5);
+    petal3.rotation.set(Math.PI / 6, 0, Math.PI * 4 / 5);
+
+    petal4.position.set(Math.sin(Math.PI * 6 / 5) * 1.5, 0.5, Math.cos(Math.PI * 6 / 5) * 1.5);
+    petal4.rotation.set(Math.PI / 6, 0, Math.PI * 6 / 5);
+
+    petal5.position.set(Math.sin(Math.PI * 8 / 5) * 1.5, 0.5, Math.cos(Math.PI * 8 / 5) * 1.5);
+    petal5.rotation.set(Math.PI / 6, 0, Math.PI * 8 / 5);
+
+    // Add petals to the scene
+    scene.add(petal1);
+    scene.add(petal2);
+    scene.add(petal3);
+    scene.add(petal4);
+    scene.add(petal5);
+
+    // Create the stem (using a cylinder)
+    const stemGeometry = new THREE.CylinderGeometry(0.1, 0.1, 5, 32);  // Top radius, bottom radius, height
+    const stemMaterial = new THREE.MeshPhongMaterial({ color: 0x008000 });  // Green color for stem
+    const stem = new THREE.Mesh(stemGeometry, stemMaterial);
+    stem.position.y = -2.5;  // Lower the stem below the petals
+    scene.add(stem);
 
     // Set initial camera position
-    camera.position.z = 5;
+    camera.position.z = 6;
 
-    // Initial scale
-    let currentScale = 1;
-
-    // Function to grow the rose with each click
-    function growRose() {
-      currentScale += 0.1; // Increase the scale by 0.1 with each click
-      redRose.scale.set(currentScale, currentScale, currentScale);
-    }
-
-    // Add an event listener for mouse click
-    window.addEventListener('click', () => {
-      growRose();
-    });
-
-    // Animation loop
+    // Animation loop for rotating the lily
     function animate() {
       requestAnimationFrame(animate);
 
-      // Rotate the rose
-      redRose.rotation.x += 0.01;
-      redRose.rotation.y += 0.01;
+      // Slightly rotate the lily to add some movement
+      petal1.rotation.z += 0.01;
+      petal2.rotation.z += 0.01;
+      petal3.rotation.z += 0.01;
+      petal4.rotation.z += 0.01;
+      petal5.rotation.z += 0.01;
 
       renderer.render(scene, camera);
     }
