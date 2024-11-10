@@ -1,87 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Growing Virtue</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-    }
-    canvas {
-      display: block;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Plane Control</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    </style>
 </head>
 <body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script>
-    // Set up the scene, camera, and renderer
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+<script>
+    let planeX, planeY; // Plane's position
+    let speed = 3; // Movement speed
 
-    // Add a light to the scene
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(5, 5, 5).normalize();
-    scene.add(light);
-
-    // Create sunflower petals using ConeGeometry (yellow petals)
-    const petalGeometry = new THREE.ConeGeometry(0.2, 1, 16);  // Radius, Height, Segments
-    const petalMaterial = new THREE.MeshPhongMaterial({ color: 0xffd700 });  // Yellow color for petals
-
-    // Add petals arranged in a circle around the center
-    const petalCount = 20;
-    const petals = [];
-    for (let i = 0; i < petalCount; i++) {
-      const angle = (i / petalCount) * Math.PI * 2;
-      const petal = new THREE.Mesh(petalGeometry, petalMaterial);
-      petal.position.set(Math.sin(angle) * 1, Math.cos(angle) * 1, 0);
-      petal.rotation.z = angle;
-      petal.rotation.y = Math.PI;
-      petals.push(petal);
-      scene.add(petal);
+    function setup() {
+        createCanvas(windowWidth, windowHeight);
+        planeX = width / 2;
+        planeY = height / 2;
     }
 
-    // Create the center of the sunflower using SphereGeometry (brown disk)
-    const centerGeometry = new THREE.SphereGeometry(0.6, 32, 32);  // Radius, widthSegments, heightSegments
-    const centerMaterial = new THREE.MeshPhongMaterial({ color: 0x8b4513 });  // Brown color for center
-    const center = new THREE.Mesh(centerGeometry, centerMaterial);
-    scene.add(center);
+    function draw() {
+        background(200, 220, 255); // Sky blue background
 
-    // Create the stem using CylinderGeometry (green stem)
-    const stemGeometry = new THREE.CylinderGeometry(0.1, 0.1, 5, 32);  // Top radius, bottom radius, height
-    const stemMaterial = new THREE.MeshPhongMaterial({ color: 0x228B22 });  // Green color for stem
-    const stem = new THREE.Mesh(stemGeometry, stemMaterial);
-    stem.position.y = -3;  // Position stem beneath the flower
-    scene.add(stem);
+        // Move plane based on WASD keys
+        if (keyIsDown(87)) planeY -= speed; // W key (up)
+        if (keyIsDown(83)) planeY += speed; // S key (down)
+        if (keyIsDown(65)) planeX -= speed; // A key (left)
+        if (keyIsDown(68)) planeX += speed; // D key (right)
 
-    // Set initial camera position
-    camera.position.z = 5;
-
-    // Animation loop to rotate the sunflower
-    function animate() {
-      requestAnimationFrame(animate);
-
-      // Rotate the entire sunflower around its Y-axis for some movement
-      //center.rotation.z += 0.01;
-      petals.forEach(petal => {
-        petal.rotation.z += 0.01;
-      });
-
-      renderer.render(scene, camera);
+        // Draw a simple paper plane
+        drawPlane(planeX, planeY);
     }
-    animate();
 
-    // Handle window resizing
-    window.addEventListener('resize', () => {
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-    });
-  </script>
+    // Function to draw a simple paper plane
+    function drawPlane(x, y) {
+        push();
+        translate(x, y);
+        fill(255); // White color for the plane
+        stroke(0);
+        beginShape();
+        vertex(-10, 5); // Left wing
+        vertex(10, 0);  // Tip of the plane
+        vertex(-10, -5); // Right wing
+        endShape(CLOSE);
+        line(-5, 0, -15, 0); // Tail
+        pop();
+    }
+
+    // Adjust canvas size if the window is resized
+    function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+    }
+</script>
 </body>
 </html>
