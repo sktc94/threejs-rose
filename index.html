@@ -37,9 +37,9 @@
     const petalCount = 20;
     const petals = [];
     for (let i = 0; i < petalCount; i++) {
-      const angle = (i / petalCount) * Math.PI * -2;
+      const angle = (i / petalCount) * Math.PI * 2;
       const petal = new THREE.Mesh(petalGeometry, petalMaterial);
-      petal.position.set(Math.sin(angle) * 1.5, Math.cos(angle) * 1.5, 0);
+      petal.position.set(Math.sin(angle) * 1, Math.cos(angle) * 1, 0);
       petal.rotation.z = angle;
       petals.push(petal);
       scene.add(petal);
