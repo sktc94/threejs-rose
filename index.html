@@ -41,6 +41,7 @@
       const petal = new THREE.Mesh(petalGeometry, petalMaterial);
       petal.position.set(Math.sin(angle) * 1, Math.cos(angle) * 1, 0);
       petal.rotation.z = angle;
+      petal.rotation.y = Math.PI;
       petals.push(petal);
       scene.add(petal);
     }
