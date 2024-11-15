@@ -11,46 +11,18 @@
 </head>
 <body>
 <script>
-    let planeX, planeY; // Plane's position
-    let speed = 3; // Movement speed
+    function setup(){
+        createCanvas(850,850);
+        colorMode(HSB, 360, 100, 100);
+        angleMode(DEGREES);
 
-    function setup() {
-        createCanvas(windowWidth, windowHeight);
-        planeX = width / 2;
-        planeY = height / 2;
+        stroke(71, 26, 92);
+        strokeWeight(6);
     }
 
-    function draw() {
-        background(200, 220, 255); // Sky blue background
-
-        // Move plane based on WASD keys
-        if (keyIsDown(87)) planeY -= speed; // W key (up)
-        if (keyIsDown(83)) planeY += speed; // S key (down)
-        if (keyIsDown(65)) planeX -= speed; // A key (left)
-        if (keyIsDown(68)) planeX += speed; // D key (right)
-
-        // Draw a simple paper plane
-        drawPlane(planeX, planeY);
-    }
-
-    // Function to draw a simple paper plane
-    function drawPlane(x, y) {
-        push();
-        translate(x, y);
-        fill(255); // White color for the plane
-        stroke(0);
-        beginShape();
-        vertex(-10, 5); // Left wing
-        vertex(10, 0);  // Tip of the plane
-        vertex(-10, -5); // Right wing
-        endShape(CLOSE);
-        line(-5, 0, -15, 0); // Tail
-        pop();
-    }
-
-    // Adjust canvas size if the window is resized
-    function windowResized() {
-        resizeCanvas(windowWidth, windowHeight);
+    function draw(){
+        background (75, 79, 51);
+        translate(width/2, height/2);
     }
 </script>
 </body>
