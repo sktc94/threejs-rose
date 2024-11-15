@@ -11,24 +11,29 @@
 </head>
 <body>
 <script>
-    function setup(){
-        createCanvas(850,850);
-        colorMode(HSB, 360, 100, 100);
-        angleMode(DEGREES);
+    function setup() {
+  createCanvas(850, 850);
+  colorMode(HSB, 360, 100, 100);
+  angleMode(DEGREES);
 
-        stroke(71, 26, 92);
-        strokeWeight(6);
-    }
+  stroke(71, 26, 92);
+  strokeWeight(6);
+}
 
-    function draw(){
-        background (75, 79, 51);
-        translate(width/2, height/2);
-        beginShape(POINTS);
-        for(let phi = 0; phi< 360; phi +=2) {
-            let x = 300 * cos(phi);
-            let y = 300 * sin(phi);
-        }
-    }
+function draw() {
+  background(75, 79, 51);
+  translate(width / 2, height / 2);
+  beginShape(POINTS);
+  let petals = 4;
+  for (let phi = 0; phi < 360; phi += 1) {
+    let r = (300 *sin(phi * petals) +100);
+    let x = r * cos(phi);
+    let y = r * sin(phi);
+    vertex(x,y);
+  }
+  endShape();
+}
+
 </script>
 </body>
 </html>
