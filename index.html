@@ -23,6 +23,11 @@
     function draw(){
         background (75, 79, 51);
         translate(width/2, height/2);
+        beginShape(POINTS);
+        for(let phi = 0; phi< 360; phi +=2) {
+            let x = 300 * cos(phi);
+            let y = 300 * sin(phi);
+        }
     }
 </script>
 </body>
