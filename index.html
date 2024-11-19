@@ -46,7 +46,7 @@ let drawRules;
 
 let word = "X"; // Initial axiom
 
-const maxGeneration = 5;
+const maxGeneration = 6;
 let currGeneration = 0;
 
 let growthPercent = 1;
@@ -56,6 +56,13 @@ const showGrowth = true;
 
 let mode = 0;
 let colour = 0;
+
+var img;
+
+function preload() {
+  // img = loadImage('hamster.jpg');
+  img = loadImage('https://freight.cargo.site/t/original/i/d45d0b3b82fa33ab5508728a9d56ef123e987837b5277dd73c3b850c8408f663/Growing-Virtue.png');
+}
 
 function setup() {
   createCanvas(850, 850, WEBGL);
@@ -67,7 +74,7 @@ function setup() {
       push();
       translate(0, -len * t); // Move to the end of the stem
       // box(t*8);
-      drawFlower(t); // Draw the flower geometry
+      drawFlower(6, 4, 4, 0.74, 0.4, 1.3); // Draw the flower geometry
       pop();
     },
     B: (t) => {
@@ -114,8 +121,14 @@ function draw() {
       newDraw(20);
       break;
     case 3:
+      angle = 30;
+      len = 12;
+      newDraw(90);
       break;
     case 4:
+      angle = 45;
+      len = 8;
+      newDraw(60);
       break;
     default: //splash
       splashScreen();
@@ -201,11 +214,11 @@ function drawLsysLerp(state, t) {
   pop();
 }
 
-function drawFlower(t) {
+function drawFlower(r, c, p, f1, f2, f3) {
   let v = [];
-  let rows = 6; // Number of rows for flower geometry
-  let cols = 4; // Number of columns for flower geometry
-  let petals = 4; // Number of petals in the flower
+  let rows = r; // Number of rows for flower geometry
+  let cols = c; // Number of columns for flower geometry
+  let petals = p; // Number of petals in the flower
 
   // Create vertices for the flower geometry
   for (let theta = 0; theta < rows; theta++) {
@@ -219,7 +232,7 @@ function drawFlower(t) {
       let x = r * cos((phi * 360) / cols);
       let y = r * sin((phi * 360) / cols);
       let z =
-        vShape(200, r / 100, 0.74, 0.4, 1.3) -
+        vShape(200, r / 100, f1, f2, f3) -
         200 +
         bump(1.5, r / 100, 3, (phi * 360) / cols);
       let pos = createVector(x, y, 0.5 * z + 100);
@@ -230,7 +243,7 @@ function drawFlower(t) {
   // Draw the flower using vertices
   for (let theta = 0; theta < v.length - 1; theta++) {
     for (let phi = 0; phi < v[theta].length; phi++) {
-      fill(colour, 100 - theta * 18, 100); // Gradient effect
+      fill(colour, 100 - theta * 6, 100); // Gradient effect
       let nextPhi = (phi + 1) % v[theta].length;
 
       beginShape();
@@ -270,7 +283,7 @@ function newDraw(setColour) {
 
   // Set up camera and view
   translate(0, height / 3, -width / 2);
-  rotateY(frameCount * 0.01); // Slow rotation for better visualization
+  rotateY(frameCount * 0.001); // Slow rotation for better visualization
   colour = setColour;
   // Draw the L-System
   drawLsysLerp(word, growthPercent);
@@ -283,19 +296,38 @@ function keyPressed() {
     // new user
   }
   if (key == "1") {
+    currGeneration = 0;
+    word = "X";
     mode = 1;
   }
   if (key == "2") {
+    currGeneration = 0;
+    word = "X";
     mode = 2;
   }
-  if (key == "s") {
+  if (key == "3") {
+    currGeneration = 0;
+    word = "X";
+    mode = 3;
+  }
+  if (key == "4") {
+    currGeneration = 0;
+    word = "X";
+    mode = 4;
+  }
+  if (key == "0") {
     mode = 0;
   }
 }
 
 function splashScreen(){
+  // rotateX(90);
   background(0);
-  rect(0,0,40,40);
+  imageMode(CENTER);
+  colour = 320;
+  drawFlower(6, 12, 5, 0.74, 0.3, 1.4);
+  image(img, 0,0,800,160); 
+  
 }
 
 </script>
