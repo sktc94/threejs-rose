@@ -65,7 +65,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(850, 850, WEBGL);
+  createCanvas(displayWidth, displayHeight, WEBGL);
   noStroke();
 
   // Initialize L-System drawing rules
@@ -106,6 +106,7 @@ function setup() {
 
 function draw() {
   background(0);
+  // rotateZ(frameRate);
   switch (mode) {
     case 0: //splash
       splashScreen();
@@ -321,12 +322,13 @@ function keyPressed() {
 }
 
 function splashScreen(){
-  // rotateX(90);
+  
   background(0);
   imageMode(CENTER);
   colour = 320;
   drawFlower(6, 12, 5, 0.74, 0.3, 1.4);
   image(img, 0,0,800,160); 
+  
   
 }
 
