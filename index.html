@@ -121,25 +121,25 @@ function draw() {
       splashScreen();
       break;
     case 1:
-      time ++;
+      time++;
       angle = 60;
       len = 7;
       newDraw(320);
       break;
     case 2:
-      time ++;
+      time++;
       angle = 90;
       len = 8;
       newDraw(20);
       break;
     case 3:
-      time ++;
+      time++;
       angle = 30;
       len = 12;
       newDraw(90);
       break;
     case 4:
-      time ++;
+      time++;
       angle = 45;
       len = 8;
       newDraw(60);
@@ -314,21 +314,25 @@ function keyPressed() {
     currGeneration = 0;
     word = "X";
     mode = 1;
+    time = 0;
   }
   if (key == "2") {
     currGeneration = 0;
     word = "X";
     mode = 2;
+    time = 0;
   }
   if (key == "3") {
     currGeneration = 0;
     word = "X";
     mode = 3;
+    time = 0;
   }
   if (key == "4") {
     currGeneration = 0;
     word = "X";
     mode = 4;
+    time = 0;
   }
   if (key == "0") {
     mode = 0;
@@ -342,6 +346,7 @@ function splashScreen() {
   drawFlower(6, 12, 5, 0.74, 0.3, 1.4);
   image(img, 0, 0, 800, 160);
 }
+
 
 
 </script>
