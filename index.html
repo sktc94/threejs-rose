@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paper Plane Control</title>
+    <title>Growing Virtue</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <style>
         body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
@@ -41,6 +41,7 @@ const rules = {
 
 let len = 7; // Length of stem
 let ang = 60; // Angle for rotations
+let time = 0;
 
 let drawRules;
 
@@ -61,7 +62,9 @@ var img;
 
 function preload() {
   // img = loadImage('hamster.jpg');
-  img = loadImage('https://freight.cargo.site/t/original/i/d45d0b3b82fa33ab5508728a9d56ef123e987837b5277dd73c3b850c8408f663/Growing-Virtue.png');
+  img = loadImage(
+    "https://freight.cargo.site/t/original/i/d45d0b3b82fa33ab5508728a9d56ef123e987837b5277dd73c3b850c8408f663/Growing-Virtue.png"
+  );
 }
 
 function setup() {
@@ -106,32 +109,43 @@ function setup() {
 
 function draw() {
   background(0);
+  // time++;
+  print(time);
+  if (time >= 5000) {
+    mode = 0;
+    time = 0;
+  }
   // rotateZ(frameRate);
   switch (mode) {
     case 0: //splash
       splashScreen();
       break;
     case 1:
+      time ++;
       angle = 60;
       len = 7;
       newDraw(320);
       break;
     case 2:
+      time ++;
       angle = 90;
       len = 8;
       newDraw(20);
       break;
     case 3:
+      time ++;
       angle = 30;
       len = 12;
       newDraw(90);
       break;
     case 4:
+      time ++;
       angle = 45;
       len = 8;
       newDraw(60);
       break;
-    default: //splash
+    default:
+      //splash
       splashScreen();
       break;
   }
@@ -321,16 +335,14 @@ function keyPressed() {
   }
 }
 
-function splashScreen(){
-  
+function splashScreen() {
   background(0);
   imageMode(CENTER);
   colour = 320;
   drawFlower(6, 12, 5, 0.74, 0.3, 1.4);
-  image(img, 0,0,800,160); 
-  
-  
+  image(img, 0, 0, 800, 160);
 }
+
 
 </script>
 </body>
