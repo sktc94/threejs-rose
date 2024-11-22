@@ -63,16 +63,16 @@ function setup() {
   noStroke();
   toggleInput(true);
   toggleInput(false);
-  
+
   // Connect to the WebSocket server
-  const socket = new WebSocket('ws://172.20.10.4:5001');
-  // Handle incoming messages
-  socket.onmessage = function (event) {
-    const modemessage = event.data;
-    if (modemessage.startsWith("mode:")) {
-      mode = int(modemessage.split(":")[1]); // Parse and set the mode
-    }
-  };
+  // const socket = new WebSocket('ws://172.20.10.4:5001');
+  // // Handle incoming messages
+  // socket.onmessage = function (event) {
+  //   const modemessage = event.data;
+  //   if (modemessage.startsWith("mode:")) {
+  //     mode = int(modemessage.split(":")[1]); // Parse and set the mode
+  //   }
+  // };
 
   video = createCapture(VIDEO); // Capture the webcam feed
   video.size(640, 480); // Set video dimensions
@@ -121,9 +121,6 @@ function draw() {
   // let userInput = input.value();
   // print(time);
   if (time >= 5000) {
-    image(video, 0, 0, width, height);
-    saveCanvas("webcam_snapshot", "png"); // Save the canvas as an image
-    window.print();
     mode = 0;
     time = 0;
   }
@@ -364,6 +361,11 @@ function keyPressed() {
   if (key == "0") {
     mode = 0;
     toggleInput(false);
+  }
+  if (keyCode == 32) {
+    image(video, 0, 0, width, height);
+    saveCanvas("webcam_snapshot", "png"); // Save the canvas as an image
+    window.print();
   }
 }
 
