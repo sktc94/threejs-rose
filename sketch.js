@@ -325,11 +325,11 @@ function newDraw(setColour) {
 }
 
 function keyPressed() {
-  if (key == "c") {
-    currGeneration = 0;
-    word = "X";
-    // new user
-  }
+  // if (key == "c") {
+  //   currGeneration = 0;
+  //   word = "X";
+  //   // new user
+  // }
   if (key == "1") {
     currGeneration = 0;
     word = "X";
