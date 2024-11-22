@@ -382,7 +382,7 @@ function splashScreen() {
 function toggleInput(showInput) {
   if (showInput) {
     input = createInput(value);
-    input.elt.focus();
+
     input.position(-1000, 0);
   } else {
     input.remove();
