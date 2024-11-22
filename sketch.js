@@ -121,7 +121,10 @@ function draw() {
   // let userInput = input.value();
   print(time);
   if (time >= 1000) {
-    
+    image(video, 0, 0, width, height);
+    print("stuck");
+    saveCanvas("webcam_snapshot", "png"); // Save the canvas as an image
+    window.print();
     mode = 0;
     time = 0;
   }
@@ -364,10 +367,7 @@ function keyPressed() {
     toggleInput(false);
   }
   if (keyCode == 32) {
-    image(video, 0, 0, width, height);
-    print("stuck");
-    saveCanvas("webcam_snapshot", "png"); // Save the canvas as an image
-    window.print();
+    
     mode = 0;
     toggleInput(false);
   }
