@@ -120,7 +120,7 @@ function draw() {
   // time++;
   // let userInput = input.value();
   // print(time);
-  if (time >= 500) {
+  if (time >= 100) {
     image(video, 0, 0, width, height);
     saveCanvas("webcam_snapshot", "png"); // Save the canvas as an image
     window.print();
