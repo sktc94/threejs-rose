@@ -26,7 +26,7 @@ const rules = {
   ],
 };
 
-let len = 7; // Length of stem
+let len = 8; // Length of stem
 let ang = 60; // Angle for rotations
 let time = 0;
 
@@ -132,7 +132,6 @@ function draw() {
   switch (mode) {
     case 0: //splash
       splashScreen();
-      toggleInput(false);
       break;
     case 1:
       time++;
@@ -152,12 +151,12 @@ function draw() {
       len = 12;
       newDraw(90);
       break;
-    case 4:
-      time++;
-      angle = 45;
-      len = 8;
-      newDraw(60);
-      break;
+    // case 4:
+    //   time++;
+    //   angle = 45;
+    //   len = 8;
+    //   newDraw(60);
+    //   break;
     default:
       //splash
       splashScreen();
@@ -255,7 +254,7 @@ function drawFlower(r, c, p, f1, f2, f3) {
     for (let phi = 0; phi < cols; phi++) {
       let r =
         (0.1 *
-          (60 * pow(abs(sin((((phi * 360) / cols) * petals) / 2)), 1) + 200) *
+          (100 * pow(abs(sin((((phi * 360) / cols) * petals) / 2)), 1) + 200) *
           theta) /
         rows;
       let x = r * cos((phi * 360) / cols);
@@ -355,22 +354,22 @@ function keyPressed() {
     value = "integrity";
     toggleInput(true);
   }
-  if (key == "4") {
-    currGeneration = 0;
-    word = "X";
-    mode = 4;
-    time = 0;
-    toggleInput(true);
-  }
+  // if (key == "4") {
+  //   currGeneration = 0;
+  //   word = "X";
+  //   mode = 4;
+  //   time = 0;
+  //   toggleInput(true);
+  // }
   if (key == "0") {
     mode = 0;
     toggleInput(false);
   }
-  if (keyCode == 32) {
+  // if (keyCode == 32) {
     
-    mode = 0;
-    toggleInput(false);
-  }
+  //   mode = 0;
+  //   toggleInput(false);
+  // }
 }
 
 function splashScreen() {
