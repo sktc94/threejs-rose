@@ -119,7 +119,7 @@ function draw() {
 
   // time++;
   // let userInput = input.value();
-  // print(time);
+  print(time);
   if (time >= 100) {
     image(video, 0, 0, width, height);
     print("stuck");
