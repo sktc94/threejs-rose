@@ -120,7 +120,7 @@ function draw() {
   // time++;
   // let userInput = input.value();
   print(time);
-  if (time >= 300) {
+  if (time >= 30000) {
     image(video, 0, 0, width, height);
     print("stuck");
     saveCanvas("webcam_snapshot", "png"); // Save the canvas as an image
@@ -365,16 +365,17 @@ function keyPressed() {
     mode = 0;
     toggleInput(false);
   }
-  // if (keyCode == 32) {
+  if (keyCode == ENTER) {
     
-  //   mode = 0;
-  //   toggleInput(false);
-  // }
+    // input.elt.focus(); // Automatically focus the input
+    input.elt.select(); // Select the entire text for overwriting
+  }
 }
 
 function splashScreen() {
   background(0);
   imageMode(CENTER);
+  
   drawFlower(6, 12, 5, 0.74, 0.3, 1.4);
   image(img, 0, 0, 800, 160);
 }
