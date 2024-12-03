@@ -311,7 +311,7 @@ function newDraw(setColour) {
 
   // Set up camera and view
   translate(0, height / 3, -width / 2);
-  rotateY(frameCount * 0.001); // Slow rotation for better visualization
+  // rotateY(frameCount * 0.001); // Slow rotation for better visualization
   colour = setColour;
   // Draw the L-System
   drawLsysLerp(word, growthPercent);
