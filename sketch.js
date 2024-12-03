@@ -120,13 +120,8 @@ function draw() {
   // time++;
   // let userInput = input.value();
   print(time);
-  if (time >= 30000 || mousePressed()) {
-    image(video, 0, 0, width, height);
-    print("stuck");
-    saveCanvas("webcam_snapshot", "png"); // Save the canvas as an image
-    window.print();
-    mode = 0;
-    time = 0;
+  if (time >= 10000) {
+    capture();
   }
   // rotateZ(frameRate);
   switch (mode) {
@@ -318,8 +313,8 @@ function newDraw(setColour) {
 
   let userInput = input.value();
   let baseSize = 512;
-  let minSize = 16;
-  let maxLength = 100;
+  let minSize = 64;
+  let maxLength = 50;
 
   let textSizeValue = map(userInput.length, 0, maxLength, baseSize, minSize);
   textSizeValue = constrain(textSizeValue, minSize, baseSize);
@@ -376,6 +371,9 @@ function keyPressed() {
     // input.elt.focus(); // Automatically focus the input
     input.elt.select(); // Select the entire text for overwriting
   }
+  if (keyCode == DOWN_ARROW) {
+    time = 9999;
+}
 }
 
 function splashScreen() {
@@ -394,4 +392,12 @@ function toggleInput(showInput) {
   } else {
     input.remove();
   }
+}
+
+function capture() {
+  image(video, 0, 0, width, height);
+    saveCanvas("webcam_snapshot", "png"); // Save the canvas as an image
+    window.print();
+    mode = 0;
+    time = 0;
 }
