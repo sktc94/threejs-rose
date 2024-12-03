@@ -316,11 +316,17 @@ function newDraw(setColour) {
   // Draw the L-System
   drawLsysLerp(word, growthPercent);
 
-  textSize(512);
+  let userInput = input.value();
+  let baseSize = 512;
+  let minSize = 16;
+  let maxLength = 100;
+
+  let textSizeValue = map(userInput.length, 0, maxLength, baseSize, minSize);
+  textSizeValue = constrain(textSizeValue, minSize, baseSize);
+  textSize(textSizeValue);
   fill(128);
   textAlign(CENTER, CENTER);
   textFont(font);
-  let userInput = input.value();
   text(userInput, 0, 0);
 }
 
